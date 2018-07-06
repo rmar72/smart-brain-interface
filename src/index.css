@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   background: linear-gradient(89deg, rgb(199, 71, 20) 0%, rgb(233, 213, 235) 75%)
 }
 
