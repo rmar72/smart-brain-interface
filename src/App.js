@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
+import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <div className="App">
         <Navigation />
         <Logo />
+        <ImageLinkForm />
       </div>
     );
   }
