@@ -36,11 +36,24 @@ class App extends Component {
     }
   }
 
-  onButtonSubmit = (event) =>{
-    console.log(event)
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
+
+  onButtonSubmit = (event) => {
+    this.setState({imgUrl: this.state.input})
+    clarifaiApp.models.predict(
+      Clarifai.FACE_DETECT_MODEL,
+      this.state.input).then(
+      function(response) {
+        // do something with response
+        console.log(response)
+      },
+      function(err) {
+        // there was an error
+        console.log(err);
+      }
+    );
   }
 
   render() {
