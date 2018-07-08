@@ -8,7 +8,7 @@ import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import './App.css';
 
-const app = new Clarifai.App({
+const clarifaiApp = new Clarifai.App({
   apiKey: 'e335640338224000ba3d1826e422aedb'
  });
 
@@ -22,42 +22,40 @@ const particleOptions = {
       }
     },
     color: {
-      value:"#000"
+      value:'#000'
     }
   }
 }
 
 class App extends Component {
-  
-  onInputChange = (event) =>{
-    app.models.predict(
-      "a403429f2ddf4b49b307e318f00e528b",
-      "https://samples.clarifai.com/face-det.jpg").then(
-    function(response) {
-      // do something with response
-      console.log(response)
-    },
-    function(err) {
-      // there was an error
-      console.log(err);
+  constructor(){
+    super();
+    this.state = {
+      input: '',
+      imgUrl : ''
     }
-  );
   }
 
   onButtonSubmit = (event) =>{
     console.log(event)
+  onInputChange = (event) => {
+    this.setState({input: event.target.value});
+  }
   }
 
   render() {
     return (
-      <div className="App">
-        <Particles className="particles"
+      <div className='App'>
+        <Particles className='particles'
           params = {particleOptions}
         />
         <Navigation />
         <Logo />
         <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
+        <ImageLinkForm 
+          onInputChange={this.onInputChange} 
+          onButtonSubmit={this.onButtonSubmit}/>
+        <FaceRecognition imgUrl={this.state.imgUrl} />
       </div>
     );
   }
