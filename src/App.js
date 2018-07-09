@@ -82,9 +82,10 @@ class App extends Component {
         <Particles className='particles'
           params = {particleOptions}
         />
-        <Navigation onRouteChange={this.onRouteChange} />
+        
         { this.state.route === 'home' ?
           <div>
+            <Navigation onRouteChange={this.onRouteChange} />
             <Logo />
             <Rank />
             <ImageLinkForm 
