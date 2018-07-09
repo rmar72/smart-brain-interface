@@ -28,10 +28,7 @@ const SignIn = ({onRouteChange}) => {
                         <p 
                             onClick={() => onRouteChange('register')} 
                             href="#0" 
-                            className="f6 link dim black db pointer"
-                        >
-                            Register
-                        </p>
+                            className="f6 link dim black db pointer" > Register </p>
                     </div>
                 </div>
             </main>

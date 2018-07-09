@@ -41,7 +41,6 @@ class App extends Component {
   }
 
   faceLocation = (data) => {
-    console.log(data)
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
     const width = Number(image.width);
@@ -55,7 +54,7 @@ class App extends Component {
   }
   
   faceBox = (box) => {
-    this.setState({box: box}, console.log(this.state.box));
+    this.setState({box: box});
   }
 
   onInputChange = (event) => {
@@ -68,7 +67,7 @@ class App extends Component {
       Clarifai.FACE_DETECT_MODEL,
       this.state.input
     )
-    .then( response => this.faceBox(this.faceLocation(response)))
+    .then( response => this.faceBox( this.faceLocation(response) ))
     .catch(err => console.log(err));
   }
 
@@ -79,28 +78,32 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Particles className='particles'
-          params = {particleOptions}
-        />
+        <Particles 
+          className='particles'
+          params = {particleOptions} />
         
-        { this.state.route === 'home' ?
-          <div>
-            <Navigation onRouteChange={this.onRouteChange} />
-            <Logo />
-            <Rank />
-            <ImageLinkForm 
-              onInputChange={this.onInputChange} 
-              onButtonSubmit={this.onButtonSubmit}/>
-            <FaceRecognition box={this.state.box} imgUrl={this.state.imgUrl} />
-          </div> 
+        { 
+          this.state.route === 'home' ?
+            <div>
+              <Navigation 
+                onRouteChange={this.onRouteChange} />
+              <Logo />
+              <Rank />
+              <ImageLinkForm 
+                onInputChange={this.onInputChange} 
+                onButtonSubmit={this.onButtonSubmit} />
+              <FaceRecognition 
+                box={this.state.box} 
+                imgUrl={this.state.imgUrl} />
+            </div> 
           : (
-            this.state.route === 'signin' ? <SignIn onRouteChange={this.onRouteChange} />
-            :
-            <Register onRouteChange={this.onRouteChange} />
-          ) 
-
-        
-          
+              this.state.route === 'signin' ? 
+                <SignIn 
+                  onRouteChange={this.onRouteChange} />
+                :
+                <Register 
+                  onRouteChange={this.onRouteChange} />
+            )
         }
       </div>
     );
