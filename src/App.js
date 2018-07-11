@@ -53,7 +53,7 @@ class App extends Component {
         id: data.id,
         name: data.name,
         email: data.email,
-        entries: data. entries,
+        entries: data.entries,
         joined: data.joined
       }
     });
@@ -86,7 +86,20 @@ class App extends Component {
       Clarifai.FACE_DETECT_MODEL,
       this.state.input
     )
-    .then( response => this.faceBox( this.faceLocation(response) ))
+    .then( response => {
+
+      fetch('http://localhost:3007/image', {
+        method: 'put',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          id: this.state.user.id
+        })
+      })
+        .then(response => response.json())
+        .then(count => this.setState(Object.assign(this.state.user, {entries: count})))
+
+      this.faceBox( this.faceLocation(response) ) 
+    })
     .catch(err => console.log(err));
   }
 
