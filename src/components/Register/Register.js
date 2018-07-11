@@ -7,7 +7,6 @@ class Register extends React.Component {
             name: '',
             email: '',
             password: ''
-            
         }
     }
 
@@ -24,8 +23,22 @@ class Register extends React.Component {
     }
 
     onRegisterSubmit = () => {
-        console.log(this.state)
-        this.props.onRouteChange('home');
+        fetch('http://localhost:3007/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password
+            })
+        })
+            .then(response => response.json())
+            .then(user => {
+                if(user){
+                    this.props.loadUser(user);
+                    this.props.onRouteChange('home');
+                }
+            });
     }
 
     render(){
