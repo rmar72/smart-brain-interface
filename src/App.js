@@ -120,6 +120,7 @@ class App extends Component {
           : (
               this.state.route === 'signin' ?
                 <SignIn
+                  loadUser={this.loadUser}
                   onRouteChange={this.onRouteChange} />
                 :
                 <Register
