@@ -97,30 +97,32 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Particles 
+        <Particles
           className='particles'
           params = {particleOptions} />
         
-        { 
+        {
           this.state.route === 'home' ?
             <div>
-              <Navigation 
+              <Navigation
                 onRouteChange={this.onRouteChange} />
               <Logo />
-              <Rank />
-              <ImageLinkForm 
-                onInputChange={this.onInputChange} 
+              <Rank
+                name={this.state.user.name}
+                entries={this.state.user.entries} />
+              <ImageLinkForm
+                onInputChange={this.onInputChange}
                 onImageSubmit={this.onImageSubmit} />
-              <FaceRecognition 
-                box={this.state.box} 
+              <FaceRecognition
+                box={this.state.box}
                 imgUrl={this.state.imgUrl} />
-            </div> 
+            </div>
           : (
-              this.state.route === 'signin' ? 
-                <SignIn 
+              this.state.route === 'signin' ?
+                <SignIn
                   onRouteChange={this.onRouteChange} />
                 :
-                <Register 
+                <Register
                   onRouteChange={this.onRouteChange}
                   loadUser={this.loadUser} />
             )
