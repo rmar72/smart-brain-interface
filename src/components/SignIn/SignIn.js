@@ -2,6 +2,17 @@ import React from 'react'
 
 class SignIn extends React.Component {
 
+    constructor(props){
+        super();
+        this.state = {
+            signInEmail: "",
+            signInPassword: ""
+        }
+    }
+
+    onEmailChange = (event) => {
+        this.setState({signInEmail: event.target.value})
+    }
     render(){
         const { onRouteChange } = this.props;
         return (
@@ -12,6 +23,13 @@ class SignIn extends React.Component {
                         <legend className="f2 fw6 ph0 mh0">Sign In</legend>
                         <div className="mt3">
                             <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
+                            <input 
+                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                type="email" 
+                                name="email-address"  
+                                id="email-address"
+                                onChange={this.onEmailChange}
+                            />
                         </div>
                         <div className="mv3">
                             <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
