@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Clarifai from 'clarifai';
 import Particles from 'react-particles-js';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
@@ -9,10 +8,6 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import './App.css';
-
-const clarifaiApp = new Clarifai.App({
-  apiKey: 'e335640338224000ba3d1826e422aedb'
- });
 
 const particleOptions = {
   particles: {
@@ -84,10 +79,14 @@ class App extends Component {
 
   onImageSubmit = (event) => {
     this.setState({imgUrl: this.state.input});
-    clarifaiApp.models.predict(
-      Clarifai.FACE_DETECT_MODEL,
-      this.state.input
-    )
+    fetch('http://localhost:3007/imageURL', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+    .then(response => response.json())
     .then( response => {
 
       fetch('http://localhost:3007/image', {
@@ -107,7 +106,7 @@ class App extends Component {
   }
 
   onRouteChange = (route) => {
-    if(route == "signin"){
+    if(route === "signin"){
       this.setState(intialState);
     }
     this.setState({route: route});
