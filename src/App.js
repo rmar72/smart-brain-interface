@@ -79,7 +79,7 @@ class App extends Component {
 
   onImageSubmit = (event) => {
     this.setState({imgUrl: this.state.input});
-    fetch('http://localhost:3007/imageURL', {
+    fetch('https://smart-brain-api18.herokuapp.com/imageURL', {
       method: 'post',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -89,7 +89,7 @@ class App extends Component {
     .then(response => response.json())
     .then( response => {
 
-      fetch('http://localhost:3007/image', {
+      fetch('https://smart-brain-api18.herokuapp.com/image', {
         method: 'put',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({

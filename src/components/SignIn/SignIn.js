@@ -19,7 +19,7 @@ class SignIn extends React.Component {
     }
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:3007/signin', {
+        fetch('https://smart-brain-api18.herokuapp.com/signin', {
             method: "POST",
             headers:{ "Content-Type" : "application/json" },
             body: JSON.stringify({
